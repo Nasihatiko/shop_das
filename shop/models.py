@@ -1,7 +1,10 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
+    """http://localhost:8000/category/computers/
+    """
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
 
@@ -13,9 +16,16 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        # http://test/object111/
+        return reverse('shop:product_list_by_category',
+                       args=[self.slug, ])
+
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category, related_name='products', on_delete=models.CASCADE
+    )
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
@@ -34,3 +44,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        # http://test/object111/
+        return reverse('shop:product_details',
+                       args=[self.slug, ])
