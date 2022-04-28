@@ -20,10 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1y$o_#14&dz3t+#l&p#7ba^##lae$wz21^#!!xvlg%187v4=&c'
+SECRET_KEY = 'django-insecure-y+kdbqcrk_d=l(_sji9v53x7eu666=sk1pw5gx3&15tm%#q=@0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
@@ -37,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # apps
+    # custom application
     'shop',
+    'cart',
+    'order',
+
 ]
 
 MIDDLEWARE = [
@@ -124,8 +128,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PAGINATOR_NUM = 4
+CART_SESSION_ID = 'cart'
